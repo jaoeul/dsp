@@ -26,5 +26,4 @@ hamming = fft_shift * np.hamming(N)
 plt.figure(2)
 plt.plot(t, hamming, '.-')
 
-
 plt.show()
