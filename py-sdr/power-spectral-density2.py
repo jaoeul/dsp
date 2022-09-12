@@ -16,15 +16,21 @@ t = Ts * np.arange(N)
 # Simulated sinusoid at 50 Hz.
 x = np.exp(1j * 2 * np.pi * 50 * t)
 
-# Add complex noise wit unity power.
+# Add complex noise with unity power.
 n = (np.random.randn(N) + 1j * np.random.randn(N)) / np.sqrt(2)
 noise_power = 2
 r = x + n * np.sqrt(noise_power)
 
+# Calculate psd.
 psd = (np.abs(np.fft.fft(r)) / N) ** 2
+
+# Convert to dB.
 psd_log = 10.0 * np.log10(psd)
+
+# Down convert.
 psd_shift = np.fft.fftshift(psd_log)
 
+# X-axis.
 f = np.arange(Fs / -2.0, Fs / 2.0, Fs / N)
 
 plt.plot(f, psd_shift)
